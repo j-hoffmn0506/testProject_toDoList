@@ -1,6 +1,6 @@
 ﻿namespace testProject_toDoList
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.components = new System.ComponentModel.Container();
+            this.dataGridViewTasks = new System.Windows.Forms.DataGridView();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.comboStatus = new System.Windows.Forms.ComboBox();
-            this.dateTimeDueDate = new System.Windows.Forms.DateTimePicker();
+            this.datePickerDueDate = new System.Windows.Forms.DateTimePicker();
             this.txtDescrition = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -39,16 +40,19 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelDes = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.labelDate = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTasks)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewTasks
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(576, 308);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTasks.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewTasks.Name = "dataGridViewTasks";
+            this.dataGridViewTasks.Size = new System.Drawing.Size(576, 308);
+            this.dataGridViewTasks.TabIndex = 0;
             // 
             // txtTitle
             // 
@@ -60,17 +64,17 @@
             // comboStatus
             // 
             this.comboStatus.FormattingEnabled = true;
-            this.comboStatus.Location = new System.Drawing.Point(261, 437);
+            this.comboStatus.Location = new System.Drawing.Point(388, 463);
             this.comboStatus.Name = "comboStatus";
             this.comboStatus.Size = new System.Drawing.Size(121, 21);
             this.comboStatus.TabIndex = 2;
             // 
-            // dateTimeDueDate
+            // datePickerDueDate
             // 
-            this.dateTimeDueDate.Location = new System.Drawing.Point(388, 437);
-            this.dateTimeDueDate.Name = "dateTimeDueDate";
-            this.dateTimeDueDate.Size = new System.Drawing.Size(200, 20);
-            this.dateTimeDueDate.TabIndex = 3;
+            this.datePickerDueDate.Location = new System.Drawing.Point(388, 437);
+            this.datePickerDueDate.Name = "datePickerDueDate";
+            this.datePickerDueDate.Size = new System.Drawing.Size(200, 20);
+            this.datePickerDueDate.TabIndex = 3;
             // 
             // txtDescrition
             // 
@@ -87,7 +91,9 @@
             this.btnAdd.Size = new System.Drawing.Size(75, 38);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Добавить";
+            this.toolTip1.SetToolTip(this.btnAdd, "Добавить задачу");
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -96,6 +102,7 @@
             this.btnEdit.Size = new System.Drawing.Size(75, 37);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "Изменить";
+            this.toolTip1.SetToolTip(this.btnEdit, "Изменить задачу (не работает)");
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -106,7 +113,9 @@
             this.btnDelete.Size = new System.Drawing.Size(75, 37);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Удалить";
+            this.toolTip1.SetToolTip(this.btnDelete, "Удалить выделенную задачу");
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnFilter
             // 
@@ -115,7 +124,9 @@
             this.btnFilter.Size = new System.Drawing.Size(75, 37);
             this.btnFilter.TabIndex = 8;
             this.btnFilter.Text = "Фильтр";
+            this.toolTip1.SetToolTip(this.btnFilter, "Выберите статус задачи для фильтрации по нему");
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // labelTitle
             // 
@@ -135,11 +146,32 @@
             this.labelDes.TabIndex = 10;
             this.labelDes.Text = "Описание";
             // 
-            // Form1
+            // labelDate
+            // 
+            this.labelDate.AutoSize = true;
+            this.labelDate.Location = new System.Drawing.Point(349, 443);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(33, 13);
+            this.labelDate.TabIndex = 11;
+            this.labelDate.Text = "Дата";
+            this.labelDate.Click += new System.EventHandler(this.labelDate_Click);
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(303, 471);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(79, 13);
+            this.labelStatus.TabIndex = 12;
+            this.labelStatus.Text = "Статус задачи";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 528);
+            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelDes);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.btnFilter);
@@ -147,16 +179,16 @@
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtDescrition);
-            this.Controls.Add(this.dateTimeDueDate);
+            this.Controls.Add(this.datePickerDueDate);
             this.Controls.Add(this.comboStatus);
             this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewTasks);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(616, 567);
             this.MinimumSize = new System.Drawing.Size(616, 567);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Список задач";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTasks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,10 +196,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewTasks;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.ComboBox comboStatus;
-        private System.Windows.Forms.DateTimePicker dateTimeDueDate;
+        private System.Windows.Forms.DateTimePicker datePickerDueDate;
         private System.Windows.Forms.TextBox txtDescrition;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
@@ -175,6 +207,9 @@
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelDes;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
 

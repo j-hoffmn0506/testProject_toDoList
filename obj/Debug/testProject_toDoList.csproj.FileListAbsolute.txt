@@ -30,6 +30,7 @@ G:\VS Projects\testProject_toDoList\bin\Debug\SQLitePCLRaw.provider.dynamic_cdec
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Buffers.dll
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Collections.Immutable.dll
 G:\VS Projects\testProject_toDoList\bin\Debug\System.ComponentModel.Annotations.dll
+G:\VS Projects\testProject_toDoList\bin\Debug\System.Data.SQLite.dll
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Memory.dll
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Numerics.Vectors.dll
@@ -66,7 +67,7 @@ G:\VS Projects\testProject_toDoList\bin\Debug\System.Numerics.Vectors.xml
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 G:\VS Projects\testProject_toDoList\bin\Debug\System.Threading.Tasks.Extensions.xml
 G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.csproj.AssemblyReference.cache
-G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.Form1.resources
+G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.MainForm.resources
 G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.Properties.Resources.resources
 G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.csproj.GenerateResource.cache
 G:\VS Projects\testProject_toDoList\obj\Debug\testProject_toDoList.csproj.CoreCompileInputs.cache

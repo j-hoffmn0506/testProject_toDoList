@@ -37,7 +37,7 @@ namespace testProject_toDoList
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             //Путь к файлу БД
-            options.UseSqlite("Data Souce = tasks.db");
+            options.UseSqlite("Data Source = tasks.db");
         }
     }
 }
