@@ -1,13 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace testProject_toDoList
 {
-    //Данные пользователя 
+    /// <summary>
+    /// Данные о пользователе
+    /// </summary>
     public class User
     {
         public int ID { get; set; }
@@ -16,7 +19,9 @@ namespace testProject_toDoList
         public List<Task> Tasks { get; set; } //Навигация
     }
 
-    //Данные о задачах
+    /// <summary>
+    /// Данные о задачах
+    /// </summary>
     public class Task
     {
         public int ID { get; set; }
@@ -28,16 +33,40 @@ namespace testProject_toDoList
         public User User { get; set; } //Навигация
     }
 
-    //Контекст базы данных
+    /// <summary>
+    /// Контекст базы данных
+    /// </summary>
     public class TaskContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Task> Tasks { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        /// <summary>
+        /// Метод для создания файла базы данных
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Путь к файлу БД
-            options.UseSqlite("Data Source = tasks.db");
+            string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
+            string dbFolder = Path.Combine(projectRoot, "database"); //Относительный путь (папка database в корне проекта)
+            Directory.CreateDirectory(dbFolder); //Создает папку, если не существует
+            string dbPath = Path.Combine(dbFolder, "tasks.db"); //Путь к самому файлу БД
+            optionsBuilder.UseSqlite($"Data Source = {dbPath}");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Task>()
+                .HasOne(t => t.User)
+                .WithMany(t => t.Tasks)
+                .HasForeignKey(t => t.UserID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
