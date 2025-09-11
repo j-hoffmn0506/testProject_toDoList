@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.dataGridViewTasks = new System.Windows.Forms.DataGridView();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.comboStatus = new System.Windows.Forms.ComboBox();
             this.datePickerDueDate = new System.Windows.Forms.DateTimePicker();
-            this.txtDescrition = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -76,13 +77,13 @@
             this.datePickerDueDate.Size = new System.Drawing.Size(200, 20);
             this.datePickerDueDate.TabIndex = 3;
             // 
-            // txtDescrition
+            // txtDescription
             // 
-            this.txtDescrition.Location = new System.Drawing.Point(12, 375);
-            this.txtDescrition.Multiline = true;
-            this.txtDescrition.Name = "txtDescrition";
-            this.txtDescrition.Size = new System.Drawing.Size(576, 56);
-            this.txtDescrition.TabIndex = 4;
+            this.txtDescription.Location = new System.Drawing.Point(12, 375);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(576, 56);
+            this.txtDescription.TabIndex = 4;
             // 
             // btnAdd
             // 
@@ -149,12 +150,11 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(349, 443);
+            this.labelDate.Location = new System.Drawing.Point(285, 443);
             this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(33, 13);
+            this.labelDate.Size = new System.Drawing.Size(97, 13);
             this.labelDate.TabIndex = 11;
-            this.labelDate.Text = "Дата";
-            this.labelDate.Click += new System.EventHandler(this.labelDate_Click);
+            this.labelDate.Text = "Срок выполнения";
             // 
             // labelStatus
             // 
@@ -178,11 +178,12 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtDescrition);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.datePickerDueDate);
             this.Controls.Add(this.comboStatus);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.dataGridViewTasks);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(616, 567);
             this.MinimumSize = new System.Drawing.Size(616, 567);
@@ -200,7 +201,7 @@
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.ComboBox comboStatus;
         private System.Windows.Forms.DateTimePicker datePickerDueDate;
-        private System.Windows.Forms.TextBox txtDescrition;
+        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
