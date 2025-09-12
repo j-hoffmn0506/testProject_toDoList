@@ -12,9 +12,13 @@ namespace testProject_toDoList
 {
     public partial class MainForm : Form
     {
+
         private readonly TaskManager _taskManager;
         private readonly int _currentUserId = 1;
         private int? _editingTaskId = null;
+        /// <summary>
+        /// Инициализация формы и некоторых копонентов
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -22,23 +26,9 @@ namespace testProject_toDoList
             LoadTasks();
             comboStatus.Items.AddRange(new[] { "Выполнить", "В процессе", "Готово" });
         }
-
-        private void btnTests_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var tests = new TaskTests();
-                string results = tests.RunTests();
-                MessageBox.Show(results, "Результаты тестов", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при запуске тестов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            LoadTasks();
-            ClearInputs();
-        }
-
+        /// <summary>
+        /// Загружает задачи текущего пользователя
+        /// </summary>
         private void LoadTasks()
         {
             dataGridViewTasks.DataSource = _taskManager.GetTasksByUser(_currentUserId);
@@ -71,6 +61,9 @@ namespace testProject_toDoList
             btnResetFilter.Enabled = false;
         }
 
+        /// <summary>
+        /// Очистка инпутов
+        /// </summary>
         private void ClearInputs()
         {
             txtTitle.Clear();
@@ -79,6 +72,11 @@ namespace testProject_toDoList
             datePickerDueDate.Value = DateTime.Now;
         }
 
+        /// <summary>
+        /// Кнопка добавления задачи
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Task task = new Task();
@@ -94,6 +92,12 @@ namespace testProject_toDoList
             ClearInputs();
             MessageBox.Show("Задача добавлена");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dataGridViewTasks.SelectedRows.Count > 0)
@@ -109,6 +113,11 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Кнопка фильтрации по статусу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFilter_Click(object sender, EventArgs e)
         {
             string status = comboStatus.SelectedItem?.ToString();
@@ -119,6 +128,11 @@ namespace testProject_toDoList
             btnResetFilter.Enabled = true;
         }
 
+        /// <summary>
+        /// Кнопка редактирования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewTasks.SelectedRows.Count == 0)
@@ -169,6 +183,11 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Кнопка отмены редактирования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearInputs();
@@ -179,6 +198,11 @@ namespace testProject_toDoList
             btnEdit.Text = "Изменить";
         }
 
+        /// <summary>
+        /// Кнопка сброса фильтров
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnResetFilter_Click(object sender, EventArgs e)
         {
             comboStatus.SelectedIndex = 0;
@@ -187,5 +211,25 @@ namespace testProject_toDoList
             MessageBox.Show("Фильтр сброшен\nВидны все задачи");
         }
 
+        /// <summary>
+        /// Кнопка запускающая тесты
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTests_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var tests = new TaskTests();
+                string results = tests.RunTests();
+                MessageBox.Show(results, "Результаты тестов", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при запуске тестов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            LoadTasks();
+            ClearInputs();
+        }
     }
 }

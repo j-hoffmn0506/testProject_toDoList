@@ -22,7 +22,9 @@ namespace testProject_toDoList
         }
     }
 
-    //CRUD-операции и фильтрация
+    /// <summary>
+    /// CRUD-операции и фильтрация
+    /// </summary>
     public class TaskManager
     {
         private readonly TaskContext _taskContext;
@@ -34,8 +36,10 @@ namespace testProject_toDoList
             EnsureTestUserExists();
         }
 
-
-            private void EnsureTestUserExists()
+        /// <summary>
+        /// Создает тестового пользователя
+        /// </summary>
+        private void EnsureTestUserExists()
         {
             if (!_taskContext.Users.Any(u => u.ID == 1))
             {
@@ -47,26 +51,39 @@ namespace testProject_toDoList
                 _taskContext.SaveChanges();
             }
         }
-        //Добавление задачи
+        /// <summary>
+        /// Добавление задачи
+        /// </summary>
+        /// <param name="task">Экземпляр класса Task</param>
         public void AddTask(Task task)
         {
             _taskContext.Tasks.Add(task);
             _taskContext.SaveChanges();
         }
-        //Получение задач пользователя
+        /// <summary>
+        /// Получение задач пользователя
+        /// </summary>
+        /// <param name="userId">ID пользователя</param>
+        /// <returns></returns>
         public List<Task> GetTasksByUser(int userId)
         {
             return _taskContext.Tasks
                 .Where(t => t.UserID == userId)
                 .ToList();
         }
-        //Обновление задачи
+        /// <summary>
+        /// Обновление задачи
+        /// </summary>
+        /// <param name="task">Экземпляр класса Task</param>
         public void UpdateTask(Task task)
         {
             _taskContext.Tasks.Update(task);
             _taskContext.SaveChanges();
         }
-        //Удаление задач
+        /// <summary>
+        /// Удаление задач
+        /// </summary>
+        /// <param name="taskId">ID задания</param>
         public void DeleteTask(int taskId)
         {
             var task = _taskContext.Tasks.Find(taskId);
@@ -76,7 +93,12 @@ namespace testProject_toDoList
                 _taskContext.SaveChanges();
             }
         }
-        //Фильтр задач по статусу
+        /// <summary>
+        /// Фильтр задач по статусу задачи
+        /// </summary>
+        /// <param name="userId">ID пользователя</param>
+        /// <param name="status">Сатус задания</param>
+        /// <returns></returns>
         public List<Task> FilterTasksByStatus(int userId, string status)
         {
             return _taskContext.Tasks

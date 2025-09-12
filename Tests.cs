@@ -15,6 +15,10 @@ namespace testProject_toDoList
             _taskManager = new TaskManager();
         }
 
+        /// <summary>
+        /// Запускает все тесты
+        /// </summary>
+        /// <returns>Возвращает общий результат в string</returns>
         public string RunTests()
         {
             string results = "=== Результаты тестов TaskManager ===\n";
@@ -23,10 +27,15 @@ namespace testProject_toDoList
             results += TestDeleteTask() + "\n";
             results += TestFilterTasksByStatus() + "\n";
             results += TestEditTask() + "\n";
+            results += TestFilterReset() + "\n";
             results += "=== Тесты завершены ===\n";
             return results;
         }
 
+        /// <summary>
+        /// Тест добавления задач
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
         private string TestAddTask()
         {
             try
@@ -35,7 +44,7 @@ namespace testProject_toDoList
                 {
                     Title = "Тестовая задача",
                     Description = "Описание тестовой задачи",
-                    Status = "ToDo",
+                    Status = "Выполнить",
                     DueDate = DateTime.Now,
                     UserID = 1
                 };
@@ -56,6 +65,10 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Тест поиска задач пользователя
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
         private string TestGetTasksByUser()
         {
             try
@@ -81,6 +94,10 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Тест удаления задач
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
         private string TestDeleteTask()
         {
             try
@@ -89,7 +106,7 @@ namespace testProject_toDoList
                 {
                     Title = "Задача для удаления",
                     Description = "Описание",
-                    Status = "ToDo",
+                    Status = "Выполнить",
                     DueDate = DateTime.Now,
                     UserID = 1
                 };
@@ -120,6 +137,10 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Тетс фильтрации задач по статусу
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
         private string TestFilterTasksByStatus()
         {
             try
@@ -128,7 +149,7 @@ namespace testProject_toDoList
                 {
                     Title = "Задача для фильтра",
                     Description = "Описание",
-                    Status = "InProgress",
+                    Status = "В процессе",
                     DueDate = DateTime.Now,
                     UserID = 1
                 };
@@ -149,6 +170,10 @@ namespace testProject_toDoList
             }
         }
 
+        /// <summary>
+        /// Тест редактирования задач
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
         private string TestEditTask()
         {
             try
@@ -157,7 +182,7 @@ namespace testProject_toDoList
                 {
                     Title = "Задача до редактирования",
                     Description = "Описание",
-                    Status = "ToDo",
+                    Status = "Выполнить",
                     DueDate = DateTime.Now,
                     UserID = 1
                 };
@@ -171,7 +196,7 @@ namespace testProject_toDoList
                     {
                         Title = "Задача после редактирования",
                         Description = "Новое описание",
-                        Status = "Done",
+                        Status = "Готово",
                         DueDate = DateTime.Now.AddDays(1),
                         UserID = 1
                     };
@@ -195,6 +220,61 @@ namespace testProject_toDoList
             catch (Exception ex)
             {
                 return $"Тест 5: Редактирование задачи - ✗ Ошибка: {ex.Message}";
+            }
+        }
+
+        /// <summary>
+        /// Тест сброса фильтрации
+        /// </summary>
+        /// <returns>Возвращает результат в string</returns>
+        private string TestFilterReset()
+        {
+            try
+            {
+                // Добавляем задачи с разными статусами
+                var task1 = new Task
+                {
+                    Title = "Задача ToDo",
+                    Description = "ToDo задача",
+                    Status = "Выполнить",
+                    DueDate = DateTime.Now,
+                    UserID = 1
+                };
+                var task2 = new Task
+                {
+                    Title = "Задача InProgress",
+                    Description = "InProgress задача",
+                    Status = "В процессе",
+                    DueDate = DateTime.Now,
+                    UserID = 1
+                };
+                _taskManager.AddTask(task1);
+                _taskManager.AddTask(task2);
+
+                // Полный список
+                var allTasks = _taskManager.GetTasksByUser(1);
+                int allCount = allTasks.Count;
+
+                // Фильтр по "ToDo"
+                var filteredTasks = _taskManager.FilterTasksByStatus(1, "Выполнить");
+                int filteredCount = filteredTasks.Count;
+
+                // "Сброс" — возвращаемся к полному списку
+                var resetTasks = _taskManager.GetTasksByUser(1);
+                int resetCount = resetTasks.Count;
+
+                if (allCount > filteredCount && resetCount == allCount)
+                {
+                    return "Тест 6: Сброс фильтра - ✓ Успех: Фильтр уменьшил список, сброс вернул полный (всего задач: " + allCount + ")";
+                }
+                else
+                {
+                    return "Тест 6: Сброс фильтра - ✗ Ошибка: Фильтр или сброс не сработал (всего: " + allCount + ", отфильтровано: " + filteredCount + ", после сброса: " + resetCount + ")";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Тест 6: Сброс фильтра - ✗ Ошибка: {ex.Message}";
             }
         }
     }
