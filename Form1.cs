@@ -23,24 +23,41 @@ namespace testProject_toDoList
             comboStatus.Items.AddRange(new[] { "Выполнить", "В процессе", "Готово" });
         }
 
+        private void btnTests_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var tests = new TaskTests();
+                string results = tests.RunTests();
+                MessageBox.Show(results, "Результаты тестов", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при запуске тестов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            LoadTasks();
+            ClearInputs();
+        }
+
         private void LoadTasks()
         {
-            dataGridViewTasks.DataSource = _taskManager.GetTaskByUser(_currentUserId);
+            dataGridViewTasks.DataSource = _taskManager.GetTasksByUser(_currentUserId);
 
             //Скрывает ненужные столбцы
             if (dataGridViewTasks.Columns["ID"] != null)
                 dataGridViewTasks.Columns["ID"].Visible = false;
             if (dataGridViewTasks.Columns["UserID"] != null)
                 dataGridViewTasks.Columns["UserID"].Visible = false;
+            if (dataGridViewTasks.Columns["User"] != null)
+                dataGridViewTasks.Columns["User"].Visible = false;
 
             if (dataGridViewTasks.Columns["Title"] != null)
                 dataGridViewTasks.Columns["Title"].HeaderText = "Название";
             if (dataGridViewTasks.Columns["Description"] != null)
+                dataGridViewTasks.Columns["Description"].Width = 233;
                 dataGridViewTasks.Columns["Description"].HeaderText = "Описание";
             if (dataGridViewTasks.Columns["Status"] != null)
                 dataGridViewTasks.Columns["Status"].HeaderText = "Статус";
-            if (dataGridViewTasks.Columns["User"] != null)
-                dataGridViewTasks.Columns["User"].HeaderText = "Пользователь";
             if (dataGridViewTasks.Columns["DueDate"] != null)
             {
                 dataGridViewTasks.Columns["DueDate"].HeaderText = "Срок выполнения";
@@ -50,7 +67,8 @@ namespace testProject_toDoList
             
             _editingTaskId = null;
             btnAdd.Enabled = true;
-            
+            btnCancel.Enabled = false;
+            btnResetFilter.Enabled = false;
         }
 
         private void ClearInputs()
@@ -98,6 +116,7 @@ namespace testProject_toDoList
             {
                 dataGridViewTasks.DataSource = _taskManager.FilterTasksByStatus(_currentUserId, status);
             }
+            btnResetFilter.Enabled = true;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -121,6 +140,7 @@ namespace testProject_toDoList
                     : DateTime.Now;
 
                 btnAdd.Enabled = false;
+                btnCancel.Enabled = true;
                 btnEdit.Text = "Сохранить";
             }
             else
@@ -147,6 +167,24 @@ namespace testProject_toDoList
                 btnEdit.Text = "Изменить";
                 MessageBox.Show("Задача обновлена");
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ClearInputs();
+            _editingTaskId = null;
+            MessageBox.Show("Редактирование отменено");
+            btnCancel.Enabled = false;
+            btnAdd.Enabled = true;
+            btnEdit.Text = "Изменить";
+        }
+
+        private void btnResetFilter_Click(object sender, EventArgs e)
+        {
+            comboStatus.SelectedIndex = 0;
+            LoadTasks();
+            btnResetFilter.Enabled = false;
+            MessageBox.Show("Фильтр сброшен\nВидны все задачи");
         }
 
     }

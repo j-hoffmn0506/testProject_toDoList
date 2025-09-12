@@ -44,6 +44,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelDate = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnResetFilter = new System.Windows.Forms.Button();
+            this.btnTests = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTasks)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,11 +168,46 @@
             this.labelStatus.TabIndex = 12;
             this.labelStatus.Text = "Статус задачи";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(175, 482);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(74, 36);
+            this.btnCancel.TabIndex = 13;
+            this.btnCancel.Text = "Отменить";
+            this.toolTip1.SetToolTip(this.btnCancel, "Отменить редактирование");
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnResetFilter
+            // 
+            this.btnResetFilter.Location = new System.Drawing.Point(12, 481);
+            this.btnResetFilter.Name = "btnResetFilter";
+            this.btnResetFilter.Size = new System.Drawing.Size(75, 37);
+            this.btnResetFilter.TabIndex = 14;
+            this.btnResetFilter.Text = "Сброс. ф.";
+            this.toolTip1.SetToolTip(this.btnResetFilter, "Сбросить фильтр");
+            this.btnResetFilter.UseVisualStyleBackColor = true;
+            this.btnResetFilter.Click += new System.EventHandler(this.btnResetFilter_Click);
+            // 
+            // btnTests
+            // 
+            this.btnTests.Location = new System.Drawing.Point(513, 495);
+            this.btnTests.Name = "btnTests";
+            this.btnTests.Size = new System.Drawing.Size(75, 23);
+            this.btnTests.TabIndex = 15;
+            this.btnTests.Text = "Тесты";
+            this.btnTests.UseVisualStyleBackColor = true;
+            this.btnTests.Click += new System.EventHandler(this.btnTests_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 528);
+            this.Controls.Add(this.btnTests);
+            this.Controls.Add(this.btnResetFilter);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.labelDes);
@@ -211,6 +249,9 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnResetFilter;
+        private System.Windows.Forms.Button btnTests;
     }
 }
 

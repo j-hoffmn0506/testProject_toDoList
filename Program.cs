@@ -34,7 +34,8 @@ namespace testProject_toDoList
             EnsureTestUserExists();
         }
 
-        private void EnsureTestUserExists()
+
+            private void EnsureTestUserExists()
         {
             if (!_taskContext.Users.Any(u => u.ID == 1))
             {
@@ -53,7 +54,7 @@ namespace testProject_toDoList
             _taskContext.SaveChanges();
         }
         //Получение задач пользователя
-        public List<Task> GetTaskByUser(int userId)
+        public List<Task> GetTasksByUser(int userId)
         {
             return _taskContext.Tasks
                 .Where(t => t.UserID == userId)

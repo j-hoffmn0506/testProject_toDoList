@@ -53,11 +53,6 @@ namespace testProject_toDoList
             string dbPath = Path.Combine(dbFolder, "tasks.db"); //Путь к самому файлу БД
             optionsBuilder.UseSqlite($"Data Source = {dbPath}");
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Task>()
