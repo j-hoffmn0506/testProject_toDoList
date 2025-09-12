@@ -16,7 +16,7 @@ namespace testProject_toDoList
         public int ID { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public List<Task> Tasks { get; set; } //Навигация
+        public List<Task> Tasks { get; set; }
     }
 
     /// <summary>
@@ -27,10 +27,10 @@ namespace testProject_toDoList
         public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; } //Статус задания (ToDo, InProgress, Done)
+        public string Status { get; set; }
         public DateTime? DueDate { get; set; }
         public int UserID { get; set; }
-        public User User { get; set; } //Навигация
+        public User User { get; set; } 
     }
 
     /// <summary>

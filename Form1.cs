@@ -94,7 +94,7 @@ namespace testProject_toDoList
         }
 
         /// <summary>
-        /// 
+        /// Кнопка удаления задачи
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -231,10 +231,10 @@ namespace testProject_toDoList
         {
             try
             {
-                // Добавляем задачи с разными статусами
+ 
                 var task1 = new Task
                 {
-                    Title = "Задача ToDo",
+                    Title = "Задача Выполнить",
                     Description = "ToDo задача",
                     Status = "Выполнить",
                     DueDate = DateTime.Now,
@@ -242,7 +242,7 @@ namespace testProject_toDoList
                 };
                 var task2 = new Task
                 {
-                    Title = "Задача InProgress",
+                    Title = "Задача В процессе",
                     Description = "InProgress задача",
                     Status = "В процессе",
                     DueDate = DateTime.Now,
@@ -251,15 +251,12 @@ namespace testProject_toDoList
                 _taskManager.AddTask(task1);
                 _taskManager.AddTask(task2);
 
-                // Полный список
                 var allTasks = _taskManager.GetTasksByUser(1);
                 int allCount = allTasks.Count;
 
-                // Фильтр по "ToDo"
                 var filteredTasks = _taskManager.FilterTasksByStatus(1, "Выполнить");
                 int filteredCount = filteredTasks.Count;
 
-                // "Сброс" — возвращаемся к полному списку
                 var resetTasks = _taskManager.GetTasksByUser(1);
                 int resetCount = resetTasks.Count;
 

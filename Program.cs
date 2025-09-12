@@ -83,7 +83,7 @@ namespace testProject_toDoList
         /// <summary>
         /// Удаление задач
         /// </summary>
-        /// <param name="taskId">ID задания</param>
+        /// <param name="taskId">ID задачи</param>
         public void DeleteTask(int taskId)
         {
             var task = _taskContext.Tasks.Find(taskId);
@@ -97,7 +97,7 @@ namespace testProject_toDoList
         /// Фильтр задач по статусу задачи
         /// </summary>
         /// <param name="userId">ID пользователя</param>
-        /// <param name="status">Сатус задания</param>
+        /// <param name="status">Статус задания</param>
         /// <returns></returns>
         public List<Task> FilterTasksByStatus(int userId, string status)
         {
